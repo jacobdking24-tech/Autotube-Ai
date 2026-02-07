@@ -1,0 +1,119 @@
+{
+  "id": "102019c365d2b3374d5842cfa0060c9c507",
+  "version": "102019c365d2b33741abdb4b8951092dd8b",
+  "schema": {
+    "name": "user",
+    "description": "Stores user accounts with authentication data.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the user.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System audit"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System audit"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System audit"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System audit"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "email",
+        "description": "User email address used for login and notifications.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Personally Identifiable Information (PII)"
+        },
+        "format": "email"
+      },
+      {
+        "name": "password_hash",
+        "description": "Hashed password for authentication.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 4,
+          "reason": "Security credential"
+        },
+        "encryption": true
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "email"
+        ],
+        "unique": true,
+        "order": false
+      }
+    ]
+  },
+  "task": {
+    "id": "6986c3d360e9598533989dbc",
+    "root": "6986c3d360e9598533989dbc",
+    "project": "6986c3d360e9598533989dbb",
+    "user": "c8211370-9041-706a-4399-cf6e1869650a"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

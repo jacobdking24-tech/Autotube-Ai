@@ -1,0 +1,276 @@
+{
+  "id": "102019c365d2b33764588d9acbbdb5d341a",
+  "version": "102019c365d2b33741abdb4b8951092dd8b",
+  "schema": {
+    "name": "video_generation",
+    "description": "Stores history of generated videos and their statuses.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the generation record.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System audit"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System audit"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System audit"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System audit"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "Foreign key referencing the user.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal relationship mapping"
+        }
+      },
+      {
+        "name": "niche_id",
+        "description": "Foreign key referencing the niche used for generation.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal relationship mapping"
+        }
+      },
+      {
+        "name": "topic",
+        "description": "The topic or title generated for the video.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User content"
+        }
+      },
+      {
+        "name": "script",
+        "description": "The generated script text content.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User content"
+        },
+        "nullable": true
+      },
+      {
+        "name": "status",
+        "description": "Status of the generation process.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Process status"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "Generating"
+          },
+          {
+            "number": 2,
+            "value": "Ready"
+          },
+          {
+            "number": 3,
+            "value": "Uploaded"
+          },
+          {
+            "number": 4,
+            "value": "Failed"
+          }
+        ]
+      },
+      {
+        "name": "video_url",
+        "description": "URL to the generated video file.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Resource location"
+        },
+        "nullable": true
+      },
+      {
+        "name": "shorts_url",
+        "description": "URL to the generated vertical video file.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Resource location"
+        },
+        "nullable": true
+      },
+      {
+        "name": "thumbnail_url",
+        "description": "URL to the generated thumbnail image.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Resource location"
+        },
+        "nullable": true
+      },
+      {
+        "name": "youtube_video_id",
+        "description": "ID of the video once uploaded to YouTube.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public platform ID"
+        },
+        "nullable": true
+      },
+      {
+        "name": "youtube_shorts_id",
+        "description": "ID of the shorts video once uploaded to YouTube.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public platform ID"
+        },
+        "nullable": true
+      },
+      {
+        "name": "uploaded_at",
+        "description": "Timestamp when the video was uploaded to YouTube.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Process tracking"
+        },
+        "nullable": true,
+        "format": "timestamp"
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "niche_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "status"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "youtube_video_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "youtube_shorts_id"
+        ],
+        "order": false
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      },
+      {
+        "referencing_fields": [
+          "niche_id"
+        ],
+        "referenced_entity": {
+          "name": "niche"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "6986c3d360e9598533989dbc",
+    "root": "6986c3d360e9598533989dbc",
+    "project": "6986c3d360e9598533989dbb",
+    "user": "c8211370-9041-706a-4399-cf6e1869650a"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}
