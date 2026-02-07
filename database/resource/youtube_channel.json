@@ -1,0 +1,187 @@
+{
+  "id": "102019c366cf94379fa8bf2a93a26bb3ecb",
+  "version": "102019c3671fd837a1b80e10fef09754638",
+  "schema": {
+    "name": "youtube_channel",
+    "description": "Stores connected YouTube channel information linked to users.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the channel connection.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System audit"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System audit"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System audit"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System audit"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "Foreign key referencing the user who owns this channel.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal relationship mapping"
+        }
+      },
+      {
+        "name": "channel_id",
+        "description": "YouTube channel ID, unique identifier from YouTube.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public channel info"
+        }
+      },
+      {
+        "name": "channel_name",
+        "description": "Display name of the YouTube channel.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public channel info"
+        }
+      },
+      {
+        "name": "access_token",
+        "description": "OAuth access token for YouTube API.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 4,
+          "reason": "Sensitive authentication token"
+        },
+        "encryption": true
+      },
+      {
+        "name": "refresh_token",
+        "description": "OAuth refresh token for YouTube API.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 4,
+          "reason": "Sensitive authentication token"
+        },
+        "encryption": true
+      },
+      {
+        "name": "connected_at",
+        "description": "Timestamp when the channel was connected.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Account activity log"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "last_upload_at",
+        "description": "Timestamp of the last upload made to this channel.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Activity tracking"
+        },
+        "nullable": true,
+        "format": "timestamp"
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "channel_id"
+        ],
+        "unique": true,
+        "order": false
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "6986c4fa3615eb895e713122",
+    "root": "6986c3d360e9598533989dbc",
+    "project": "6986c3d360e9598533989dbb",
+    "user": "c8211370-9041-706a-4399-cf6e1869650a"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

@@ -1,0 +1,6 @@
+{
+  "integrationId": "api:68f874c693fecd38dba9b929",
+  "name": "NanoBanana",
+  "description": "Add Google's NanoBanana for text-to-image generation to your app. Enable your app to generate photorealistic images instantly with no setup, accounts, or API keys required.",
+  "docPath": "src/sdk/api-clients/68f874c693fecd38dba9b929/requestNanoBanana.md"
+}

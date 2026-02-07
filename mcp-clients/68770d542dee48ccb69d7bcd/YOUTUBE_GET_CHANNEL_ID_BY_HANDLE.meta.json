@@ -1,0 +1,6 @@
+{
+  "integrationId": "mcp:68770d542dee48ccb69d7bcd",
+  "name": "YOUTUBE_GET_CHANNEL_ID_BY_HANDLE",
+  "description": "Retrieves the YouTube Channel ID for a specific YouTube channel handle.",
+  "docPath": "src/sdk/mcp-clients/68770d542dee48ccb69d7bcd/YOUTUBE_GET_CHANNEL_ID_BY_HANDLE.md"
+}
